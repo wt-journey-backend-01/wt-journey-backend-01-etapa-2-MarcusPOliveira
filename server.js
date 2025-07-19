@@ -2,11 +2,17 @@ const express = require('express')
 const app = express()
 const PORT = 3000
 
+const agentesRoutes = require('./routes/agentesRoutes')
+const casosRoutes = require('./routes/casosRoutes')
+
+const setupSwagger = require('./docs/swagger')
+
 app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('Bem-vindo ao Departamento de Polícia!')
-})
+app.use(agentesRoutes)
+app.use(casosRoutes)
+
+setupSwagger(app)
 
 app.listen(PORT, () => {
   console.log(

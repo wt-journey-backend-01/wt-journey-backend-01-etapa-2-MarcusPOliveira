@@ -81,23 +81,38 @@ const create = (req, res) => {
   res.status(201).json(novoAgente)
 }
 
-const put = (req, res) => {
+const put = (req, res, next) => {
   try {
-    const data = agenteSchema.parse(req.body)
+    const { id } = req.params
+    const parsed = agenteSchema.safeParse(req.body)
 
-    console.log('Dados:', data)
+    if (!parsed.success) {
+      const errors = parsed.error.issues.map((issue) => ({
+        [issue.path[0]]: issue.message,
+      }))
+      return res.status(400).json({
+        status: 400,
+        message: 'Parâmetros inválidos',
+        errors,
+      })
+    }
 
-    const updated = agentesRepository.update(req.params.id, data)
-    if (!updated)
+    if (parsed.data.id !== id) {
+      return res.status(400).json({
+        status: 400,
+        message: 'ID no corpo da requisição deve ser igual ao ID da URL',
+        errors: [{ id: 'ID inconsistente com o parâmetro da URL' }],
+      })
+    }
+
+    const updated = agentesRepository.update(id, parsed.data)
+    if (!updated) {
       return res.status(404).json({ message: 'Agente não encontrado' })
+    }
 
     res.json(updated)
-  } catch (error) {
-    res.status(400).json({
-      status: 400,
-      message: 'Parâmetros inválidos',
-      errors: error.flatten().fieldErrors,
-    })
+  } catch (err) {
+    next(err)
   }
 }
 

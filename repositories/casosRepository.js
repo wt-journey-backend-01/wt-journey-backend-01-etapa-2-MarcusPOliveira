@@ -1,43 +1,43 @@
 const casos = [
   {
-    id: 'f5fb2ad5-22a8-4cb4-90f2-8733517a0d46',
+    id: 'd3bb1c35-9c95-4af6-81b9-d52bbf6b9c3e',
     titulo: 'homicidio',
     descricao:
       'Disparos foram reportados às 22:33 do dia 10/07/2007 na região do bairro União, resultando na morte da vítima, um homem de 45 anos.',
     status: 'aberto',
-    agente_id: '401bccf5-cf9e-489d-8412-446cd169a0f1',
+    agente_id: 'f3429b63-168c-4f69-93dc-f1ea2f87a318',
   },
   {
-    id: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890',
+    id: '7c8af287-7763-472e-b92a-bd19bb3aa416',
     titulo: 'roubo',
     descricao:
       'Roubo de veículo ocorrido às 15:20 do dia 12/08/2021 no centro da cidade.',
-    status: 'em andamento',
-    agente_id: '12345678-1234-5678-1234-567812345678',
+    status: 'aberto',
+    agente_id: '839d3f71-6a65-43cf-9e4d-fb6b1ec4df57',
   },
   {
-    id: 'b2c3d4e5-f6a7-8901-bcde-f23456789012',
+    id: 'd5a071f7-7ad9-4ef0-9247-c82cd450a405',
     titulo: 'furto',
     descricao:
       'Furto de residência registrado às 10:00 do dia 05/09/2022 no bairro Jardim.',
-    status: 'resolvido',
-    agente_id: '23456789-2345-6789-2345-678923456789',
+    status: 'solucionado',
+    agente_id: 'e4c8f63c-7e13-4be5-b7f5-c7748b98e7b2',
   },
   {
-    id: 'c3d4e5f6-a7b8-9012-cdef-g34567890123',
+    id: '4b48f8a5-4e16-44ab-bb26-47300c8ebea3',
     titulo: 'sequestro',
     descricao:
       'Sequestro relatado às 18:45 do dia 20/10/2023 na região sul da cidade.',
     status: 'aberto',
-    agente_id: '34567890-3456-7890-3456-789034567890',
+    agente_id: '1dc451a1-1c2c-4e2a-a774-63ae2e47ce8b',
   },
   {
-    id: 'd4e5f6a7-b8c9-0123-defg-h45678901234',
+    id: 'e3b0323e-bf99-4d10-9fd1-fccad503c5d2',
     titulo: 'assalto a banco',
     descricao:
       'Assalto a banco ocorrido às 14:30 do dia 15/11/2024 no centro financeiro.',
-    status: 'em andamento',
-    agente_id: '45678901-4567-8901-4567-890145678901',
+    status: 'solucionado',
+    agente_id: 'c0a1cfe9-810f-4ac3-9757-4f1031d0cc72',
   },
 ]
 

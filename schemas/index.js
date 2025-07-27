@@ -9,4 +9,15 @@ const agenteSchema = z.object({
   cargo: z.string().min(1),
 })
 
-module.exports = { agenteSchema }
+const casoSchema = z.object({
+  id: z.string().uuid("Campo 'id' deve ser um UUID válido"),
+  titulo: z.string().min(1, "Campo 'titulo' é obrigatório"),
+  descricao: z.string().min(1, "Campo 'descricao' é obrigatório"),
+  status: z.enum(
+    ['aberto', 'solucionado'],
+    "Status deve ser 'aberto' ou 'solucionado'"
+  ),
+  agente_id: z.string().uuid("Campo 'agente_id' deve ser um UUID válido"),
+})
+
+module.exports = { agenteSchema, casoSchema }

@@ -5,9 +5,22 @@ const getAll = (req, res) => {
   const { agente_id, status, q } = req.query
   let data = casosRepository.findAll()
 
-  if (agente_id) data = casosRepository.findByAgenteId(agente_id)
-  if (status) data = casosRepository.findByStatus(status)
-  if (q) data = casosRepository.searchByQuery(q)
+  if (agente_id) {
+    data = data.filter((caso) => caso.agente_id === agente_id)
+  }
+
+  if (status) {
+    data = data.filter((caso) => caso.status === status)
+  }
+
+  if (q) {
+    const qLower = q.toLowerCase()
+    data = data.filter(
+      (caso) =>
+        caso.titulo.toLowerCase().includes(qLower) ||
+        caso.descricao.toLowerCase().includes(qLower)
+    )
+  }
 
   res.json(data)
 }

@@ -10,7 +10,16 @@ const getAll = (req, res) => {
   }
 
   if (status) {
-    data = data.filter((caso) => caso.status === status)
+    const statusValidos = ['aberto', 'solucionado']
+    if (!statusValidos.includes(status.toLowerCase())) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Status inválido no filtro',
+        errors: [{ status: 'Status deve ser "aberto" ou "solucionado"' }],
+      })
+    }
+
+    data = data.filter((caso) => caso.status === status.toLowerCase())
   }
 
   if (q) {
@@ -33,6 +42,7 @@ const getById = (req, res) => {
 
 const create = (req, res) => {
   const parsed = casoSchema.safeParse(req.body)
+  console.log('Dados recebidos:', parsed)
 
   if (!parsed.success) {
     const errors = parsed.error.issues.map((issue) => ({
@@ -44,6 +54,13 @@ const create = (req, res) => {
       message: 'Parâmetros inválidos',
       errors,
     })
+  }
+
+  const agenteExiste = casosRepository.findByAgenteId(parsed.data.agente_id)
+  if (!agenteExiste) {
+    return res
+      .status(404)
+      .json({ message: 'Agente responsável não encontrado' })
   }
 
   const novo = casosRepository.create(parsed.data)

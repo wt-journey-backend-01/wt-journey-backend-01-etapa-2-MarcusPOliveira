@@ -9,8 +9,8 @@ const setupSwagger = require('./docs/swagger')
 
 app.use(express.json())
 
-app.use(agentesRoutes)
-app.use(casosRoutes)
+app.use('/agentes', agentesRoutes)
+app.use('/casos', casosRoutes)
 
 setupSwagger(app)
 

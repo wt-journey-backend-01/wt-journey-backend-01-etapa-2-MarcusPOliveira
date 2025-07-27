@@ -2,12 +2,21 @@ const { agenteSchema } = require('../schemas')
 const agentesRepository = require('../repositories/agentesRepository')
 
 const getAll = (req, res) => {
-  let allAgentes = agentesRepository.findAll()
-  // res.status(200).json(allAgentes)
-
+  let agentes = agentesRepository.findAll()
   const { cargo, sort } = req.query
 
   if (cargo) {
+    const cargosValidos = ['delegado', 'inspetor']
+    if (!cargosValidos.includes(cargo.toLowerCase())) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Cargo inválido no filtro',
+        errors: [
+          { cargo: 'Cargo não reconhecido. Use "delegado" ou "inspetor"' },
+        ],
+      })
+    }
+
     agentes = agentes.filter(
       (a) => a.cargo.toLowerCase() === cargo.toLowerCase()
     )
@@ -18,16 +27,26 @@ const getAll = (req, res) => {
     const sortKey = sort.replace('-', '')
     const reverse = sort.startsWith('-')
 
-    if (validSortFields.includes(sortKey)) {
-      agentes.sort((a, b) => {
-        const aDate = new Date(a[sortKey])
-        const bDate = new Date(b[sortKey])
-        return reverse ? bDate - aDate : aDate - bDate
+    if (!validSortFields.includes(sortKey)) {
+      return res.status(400).json({
+        status: 400,
+        message: 'Campo de ordenação inválido',
+        errors: [
+          {
+            sort: 'Campo sort deve ser "dataDeIncorporacao" ou "-dataDeIncorporacao"',
+          },
+        ],
       })
     }
+
+    agentes.sort((a, b) => {
+      const aDate = new Date(a[sortKey])
+      const bDate = new Date(b[sortKey])
+      return reverse ? bDate - aDate : aDate - bDate
+    })
   }
 
-  res.json(allAgentes)
+  res.json(agentes)
 }
 
 const getById = (req, res) => {

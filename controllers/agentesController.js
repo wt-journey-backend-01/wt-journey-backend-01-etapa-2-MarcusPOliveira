@@ -5,17 +5,26 @@ const getAll = (req, res) => {
   let allAgentes = agentesRepository.findAll()
   // res.status(200).json(allAgentes)
 
-  if (req.query.cargo) {
-    allAgentes = allAgentes.filter((a) => a.cargo === req.query.cargo)
+  const { cargo, sort } = req.query
+
+  if (cargo) {
+    agentes = agentes.filter(
+      (a) => a.cargo.toLowerCase() === cargo.toLowerCase()
+    )
   }
 
-  if (req.query.sort) {
-    const sortKey = req.query.sort.replace('-', '')
-    const reverse = req.query.sort.startsWith('-')
-    allAgentes.sort((a, b) => {
-      if (reverse) return new Date(b[sortKey]) - new Date(a[sortKey])
-      return new Date(a[sortKey]) - new Date(b[sortKey])
-    })
+  if (sort) {
+    const validSortFields = ['dataDeIncorporacao']
+    const sortKey = sort.replace('-', '')
+    const reverse = sort.startsWith('-')
+
+    if (validSortFields.includes(sortKey)) {
+      agentes.sort((a, b) => {
+        const aDate = new Date(a[sortKey])
+        const bDate = new Date(b[sortKey])
+        return reverse ? bDate - aDate : aDate - bDate
+      })
+    }
   }
 
   res.json(allAgentes)

@@ -1,4 +1,5 @@
 const casosRepository = require('../repositories/casosRepository')
+const agentesRepository = require('../repositories/agentesRepository')
 const { casoSchema } = require('../schemas')
 
 const getAll = (req, res) => {
@@ -56,7 +57,7 @@ const create = (req, res) => {
     })
   }
 
-  const agenteExiste = casosRepository.findByAgenteId(parsed.data.agente_id)
+  const agenteExiste = agentesRepository.findByAgenteId(parsed.data.agente_id)
   if (!agenteExiste) {
     return res
       .status(404)

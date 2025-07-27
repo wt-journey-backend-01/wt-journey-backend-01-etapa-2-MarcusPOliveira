@@ -4,15 +4,17 @@ const PORT = 3000
 
 const agentesRoutes = require('./routes/agentesRoutes')
 const casosRoutes = require('./routes/casosRoutes')
+// const errorHandler = require('./utils/errorHandler')
 
 const setupSwagger = require('./docs/swagger')
 
 app.use(express.json())
 
-app.use('/agentes', agentesRoutes)
-app.use('/casos', casosRoutes)
-
 setupSwagger(app)
+
+app.use(agentesRoutes)
+app.use(casosRoutes)
+// app.use(errorHandler)
 
 app.listen(PORT, () => {
   console.log(

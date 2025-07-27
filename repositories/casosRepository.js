@@ -5,7 +5,7 @@ const casos = [
     descricao:
       'Disparos foram reportados às 22:33 do dia 10/07/2007 na região do bairro União, resultando na morte da vítima, um homem de 45 anos.',
     status: 'aberto',
-    agente_id: 'f3429b63-168c-4f69-93dc-f1ea2f87a318',
+    agente_id: '401bccf5-cf9e-489d-8412-446cd169a0f1',
   },
   {
     id: '7c8af287-7763-472e-b92a-bd19bb3aa416',
@@ -13,7 +13,7 @@ const casos = [
     descricao:
       'Roubo de veículo ocorrido às 15:20 do dia 12/08/2021 no centro da cidade.',
     status: 'aberto',
-    agente_id: '839d3f71-6a65-43cf-9e4d-fb6b1ec4df57',
+    agente_id: 'a52fa070-3704-4d9d-aef5-d31d9b963419',
   },
   {
     id: 'd5a071f7-7ad9-4ef0-9247-c82cd450a405',
@@ -21,7 +21,7 @@ const casos = [
     descricao:
       'Furto de residência registrado às 10:00 do dia 05/09/2022 no bairro Jardim.',
     status: 'solucionado',
-    agente_id: 'e4c8f63c-7e13-4be5-b7f5-c7748b98e7b2',
+    agente_id: '6b6aa5f6-d13e-4e1d-8711-9d173b7cc5a9',
   },
   {
     id: '4b48f8a5-4e16-44ab-bb26-47300c8ebea3',
@@ -29,7 +29,7 @@ const casos = [
     descricao:
       'Sequestro relatado às 18:45 do dia 20/10/2023 na região sul da cidade.',
     status: 'aberto',
-    agente_id: '1dc451a1-1c2c-4e2a-a774-63ae2e47ce8b',
+    agente_id: '35458b61-72e5-463b-a181-e10b3f0f858e',
   },
   {
     id: 'e3b0323e-bf99-4d10-9fd1-fccad503c5d2',
@@ -37,7 +37,7 @@ const casos = [
     descricao:
       'Assalto a banco ocorrido às 14:30 do dia 15/11/2024 no centro financeiro.',
     status: 'solucionado',
-    agente_id: 'c0a1cfe9-810f-4ac3-9757-4f1031d0cc72',
+    agente_id: 'c8b71c9e-0f7e-48a2-a8c3-6d9693e64f3f',
   },
 ]
 

@@ -58,8 +58,8 @@ const create = (req, res) => {
     })
   }
 
-  agentesRepository.create(data.data)
-  res.status(201).json(data)
+  const novoAgente = agentesRepository.create(data.data)
+  res.status(201).json(novoAgente)
 }
 
 const put = (req, res) => {

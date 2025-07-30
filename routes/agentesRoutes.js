@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+
 const agentesController = require('../controllers/agentesController')
 
 /**
@@ -66,11 +67,8 @@ router.get('/agentes/:id', agentesController.getById)
  *         application/json:
  *           schema:
  *             type: object
- *             required: [id, nome, dataDeIncorporacao, cargo]
+ *             required: [nome, dataDeIncorporacao, cargo]
  *             properties:
- *               id:
- *                 type: string
- *                 format: uuid
  *               nome:
  *                 type: string
  *               dataDeIncorporacao:

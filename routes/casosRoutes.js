@@ -71,11 +71,8 @@ router.get('/casos/:id', casosController.getById)
  *         application/json:
  *           schema:
  *             type: object
- *             required: [id, titulo, descricao, status, agente_id]
+ *             required: [titulo, descricao, status, agente_id]
  *             properties:
- *               id:
- *                 type: string
- *                 format: uuid
  *               titulo:
  *                 type: string
  *               descricao:
@@ -125,6 +122,7 @@ router.post('/casos', casosController.create)
  *                 enum: [aberto, solucionado]
  *               agente_id:
  *                 type: string
+ *                 format: uuid
  *     responses:
  *       200:
  *         description: Caso atualizado com sucesso
@@ -163,6 +161,7 @@ router.put('/casos/:id', casosController.put)
  *                 enum: [aberto, solucionado]
  *               agente_id:
  *                 type: string
+ *                 format: uuid
  *     responses:
  *       200:
  *         description: Caso atualizado com sucesso

@@ -1,4 +1,6 @@
-const { agenteSchema } = require('../schemas')
+const { v4: uuidv4 } = require('uuid')
+
+const { agenteSchema, agenteSchemaComId } = require('../schemas')
 const agentesRepository = require('../repositories/agentesRepository')
 
 const getAll = (req, res) => {
@@ -59,17 +61,12 @@ const getById = (req, res) => {
 }
 
 const create = (req, res) => {
-  const data = agenteSchema.safeParse(req.body)
+  const parsed = agenteSchema.safeParse(req.body)
 
-  console.log('Dados:', data)
-
-  if (!data.success) {
-    console.error('Erro de validação:', data.error)
-
-    const formattedErrors = data.error.issues.map((issue) => ({
+  if (!parsed.success) {
+    const formattedErrors = parsed.error.issues.map((issue) => ({
       [issue.path[0]]: issue.message,
     }))
-
     return res.status(400).json({
       status: 400,
       message: 'Parâmetros inválidos',
@@ -77,14 +74,19 @@ const create = (req, res) => {
     })
   }
 
-  const novoAgente = agentesRepository.create(data.data)
+  const novoAgente = {
+    id: uuidv4(),
+    ...parsed.data,
+  }
+
+  agentesRepository.create(novoAgente)
   res.status(201).json(novoAgente)
 }
 
 const put = (req, res, next) => {
   try {
     const { id } = req.params
-    const parsed = agenteSchema.safeParse(req.body)
+    const parsed = agenteSchemaComId.safeParse(req.body)
 
     if (!parsed.success) {
       const errors = parsed.error.issues.map((issue) => ({
@@ -119,7 +121,6 @@ const put = (req, res, next) => {
 const patch = (req, res) => {
   try {
     const partialSchema = agenteSchema.partial()
-
     const data = partialSchema.parse(req.body)
 
     const updated = agentesRepository.patch(req.params.id, data)

@@ -17,25 +17,26 @@ const update = (id, updated) => {
   const index = agentes.findIndex((agente) => agente.id === id)
   if (index === -1) return null
 
-  updated.id = id
   agentes[index] = updated
 
   return updated
 }
 
-const patch = (id, data) => {
-  const agente = findById(id)
-  if (!agente) return null
+const patch = (id, partial) => {
+  const index = agentes.findIndex((a) => a.id === id)
+  if (index === -1) return null
 
-  Object.assign(agente, data)
+  agentes[index] = { ...agentes[index], ...partial }
 
-  return agente
+  return agentes[index]
 }
 
 const remove = (id) => {
   const index = agentes.findIndex((agente) => agente.id === id)
   if (index === -1) return false
+
   agentes.splice(index, 1)
+
   return true
 }
 

@@ -8,22 +8,6 @@ const findById = (id) => {
   return casos.find((caso) => caso.id === id)
 }
 
-const findByAgenteId = (agenteId) => {
-  return casos.filter((caso) => caso.agente_id === agenteId)
-}
-
-const findByStatus = (status) => {
-  return casos.filter((caso) => caso.status === status)
-}
-
-const searchByQuery = (q) => {
-  return casos.filter(
-    (caso) =>
-      caso.titulo.toLowerCase().includes(q.toLowerCase()) ||
-      caso.descricao.toLowerCase().includes(q.toLowerCase())
-  )
-}
-
 const create = (caso) => {
   casos.push(caso)
   return caso
@@ -60,9 +44,6 @@ const remove = (id) => {
 module.exports = {
   findAll,
   findById,
-  findByAgenteId,
-  findByStatus,
-  searchByQuery,
   create,
   update,
   patch,
